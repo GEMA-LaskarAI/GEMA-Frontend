@@ -13,10 +13,10 @@ function DashboardPage() {
         <div className="dashboard-page">
             <div className="dashboard-layout">
                 <h1>Dashboard</h1>
-                <Button onClick={handleLogout}>Keluar</Button>
                 <Link to="/question" className="create-link">
-                    Question
+                    Coba Question
                 </Link>
+                <Button variant="danger" onClick={handleLogout}>Keluar</Button>
             </div>
         </div>
     );

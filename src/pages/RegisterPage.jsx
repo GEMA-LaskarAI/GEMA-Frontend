@@ -11,6 +11,7 @@ function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    const isFormValid = name && email && password;
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
@@ -61,7 +62,7 @@ function RegisterPage() {
 
                     {error && <p className="form-error">{error}</p>}
 
-                    <Button type="submit" disabled={loading}>
+                    <Button type="submit" disabled={loading || !isFormValid}>
                         {loading ? "Mendaftarkan..." : "Daftar"}
                     </Button>
                 </form>

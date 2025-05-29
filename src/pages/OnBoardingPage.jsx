@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function OnBoardingPage() {
     const navigate = useNavigate();
@@ -11,6 +11,9 @@ function OnBoardingPage() {
         <div className="onboarding-page">
             <div className="onboarding-layout">
                 <h1 onClick={handleStart}>Onboarding</h1>
+                <Link to="/login" className="create-link">
+                    Login
+                </Link>
             </div>
         </div>
     );

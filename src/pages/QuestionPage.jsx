@@ -66,7 +66,13 @@ function QuestionPage() {
                     </div>
                 ))}
 
-                <Button onClick={handleSubmit}>Kirim Jawaban</Button>
+                <Button
+                    onClick={handleSubmit}
+                    disabled={answers.some((a) => a.score === 0)}
+                >
+                    Kirim Jawaban
+                </Button>
+
             </div>
         </div>
     );

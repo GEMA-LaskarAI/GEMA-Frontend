@@ -12,6 +12,8 @@ function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    const isFormValid = username && password;
+
     useEffect(() => {
         const savedUsername = localStorage.getItem("rememberUsername");
         if (savedUsername) {
@@ -80,7 +82,7 @@ function LoginPage() {
 
                     {error && <p className="form-error">{error}</p>}
 
-                    <Button type="submit" disabled={loading}>
+                    <Button type="submit" disabled={loading || !isFormValid}>
                         {loading ? "Sedang Masuk..." : "Masuk"}
                     </Button>
                 </form>
