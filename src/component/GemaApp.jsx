@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage.jsx";
 import OnBoardingPage from "../pages/OnBoardingPage.jsx";
 import DashboardPage from "../pages/DashboardPage.jsx"; // misalnya
 import { PrivateRoute, PublicRoute } from "./GemaRoute.jsx";
+import QuestionPage from "../pages/QuestionPage.jsx";
 
 function GemaApp() {
     return (
@@ -35,6 +36,13 @@ function GemaApp() {
                         element={
                             <PrivateRoute>
                                 <DashboardPage />
+                            </PrivateRoute>
+                        }
+                />
+                <Route path="/question"
+                        element={
+                            <PrivateRoute>
+                                <QuestionPage />
                             </PrivateRoute>
                         }
                 />

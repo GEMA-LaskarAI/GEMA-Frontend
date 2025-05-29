@@ -13,6 +13,7 @@
     --color-background-button-hover: #4f73d9;
     --color-danger: #fa896b;
     --color-error: #f56565;
+    --color-red: #d32f2f;
     --color-danger-hover: #965240;
 }
 
@@ -181,4 +182,74 @@ body {
 
 .create-link:hover {
     text-decoration: underline;
+}
+
+/*Dashboard*/
+.dashboard-page {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+/*Question Page*/
+.question-page {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+.question-header {
+    background-color: var(--color-red);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.question-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.question-text {
+    font-weight: 500;
+    margin-bottom: 24px;
+}
+
+.scale-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    gap: 4px;
+}
+
+.scale-label {
+    font-size: 14px;
+    color: var(--color-icon);
+}
+
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-background-button);
+    cursor: pointer;
+}
+
+input[type="radio"]:hover {
+    transform: scale(1.1);
+    transition: 0.15s ease;
 }
