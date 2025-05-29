@@ -12,6 +12,7 @@
     --color-background-button: #5d87ff;
     --color-background-button-hover: #4f73d9;
     --color-danger: #fa896b;
+    --color-error: #f56565;
     --color-danger-hover: #965240;
 }
 
@@ -144,6 +145,12 @@ body {
     font-size: 14px;
     color: var(--color-text);
     margin-top: 16px;
+}
+
+.form-error {
+    color: var(--color-error);
+    font-size: 14px;
+    margin-top: 4px;
 }
 
 .login-options {

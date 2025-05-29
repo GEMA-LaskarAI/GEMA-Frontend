@@ -1,14 +1,16 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../component/ui/Input.jsx";
 import Button from "../component/ui/Button.jsx";
-import {Link, useNavigate} from "react-router-dom";
-import {loginUser} from "../services/authService.js";
+import { loginUser } from "../services/authService.js";
 
 function LoginPage() {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const savedUsername = localStorage.getItem("rememberUsername");
@@ -28,20 +30,19 @@ function LoginPage() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setError("");
 
         try {
-            const res = await loginUser({
-                email: username,
-                password,
-            });
+            const res = await loginUser({ email: username, password });
+            const token = res.data.access_token;
 
-            localStorage.setItem("token", res.data.access_token);
-            console.log("Login berhasil:", res);
+            localStorage.setItem("token", token);
             navigate("/dashboard");
-
         } catch (err) {
-            console.error("Login gagal:", err.message);
-            alert(err.message);
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -77,7 +78,11 @@ function LoginPage() {
                         </label>
                     </div>
 
-                    <Button type="submit">Masuk</Button>
+                    {error && <p className="form-error">{error}</p>}
+
+                    <Button type="submit" disabled={loading}>
+                        {loading ? "Sedang Masuk..." : "Masuk"}
+                    </Button>
                 </form>
 
                 <p className="login-bottom-text">
