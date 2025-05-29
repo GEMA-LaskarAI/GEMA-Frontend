@@ -138,3 +138,40 @@ body {
 .login-form button {
     margin-top: 8px;
 }
+
+.login-bottom-text {
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text);
+    margin-top: 16px;
+}
+
+.login-options {
+    font-size: 14px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    accent-color: var(--color-background-button);
+    cursor: pointer;
+}
+
+.create-link {
+    color: var(--color-background-button);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.create-link:hover {
+    text-decoration: underline;
+}
