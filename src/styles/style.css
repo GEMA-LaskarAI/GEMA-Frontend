@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap");
+
+:root {
+    --font-family: "Plus Jakarta Sans", serif;
+    --color-text: #7c8fac;
+    --color-background: #202936;
+    --color-selected: #5d87ff;
+    --color-border: #333f55;
+    --color-white: #fff;
+    --color-hover: #253662;
+    --color-danger: #fa896b;
+    --color-danger-hover: #965240;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family), serif;
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+button, a {
+    all: unset;
+    cursor: pointer;
+}
+
+/*Note Sidebar*/
+.note-sidebar {
+    width: 270px;
+    border-right: 1px solid var(--color-border);
+    height: 100%;
+    flex-shrink: 0;
+    background: var(--color-background);
+    position: fixed;
+    padding: 24px;
+    transition: width 0.3s ease-in-out;
+    z-index: 99;
+}
+
+.note-sidebar.active {
+    width: 90px;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-sidebar h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note-sidebar.active h1 {
+    display: none;
+}
+
+.note-sidebar.active .icon-meh {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+}
+
+.note-sidebar.active .icon-name {
+    display: none;
+}
+
+.note-sidebar.active:hover,
+.note-sidebar.active:hover h1,
+.note-sidebar.active:hover .icon-name
+{
+    display: block;
+    width: 270px;
+}
+
+.note-sidebar.active:hover .icon-meh {
+    display: none;
+}
+
+.note-sidebar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+}
+
+.note-sidebar__header h1 {
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.note-sidebar__header .icon,
+.note-sidebar__header .icon-meh {
+    display: none;
+    height: 22px;
+    width: 22px;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 36px;
+}
+
+.sidebar-link {
+    all: unset;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar-link:hover {
+    color: var(--color-selected);
+    background: var(--color-hover);
+}
+
+.sidebar-link.active {
+    color: var(--color-white);
+    background-color: var(--color-selected);
+}
+
+.sidebar-link span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.sidebar-link .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/*Note Header*/
+.note-layout {
+    margin-left: 270px;
+    padding: 24px;
+    transition: margin-left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.note-sidebar.active + .note-layout {
+    margin-left: 90px;
+}
+
+.note-header {
+    display: flex;
+    gap: 8px;
+}
+
+.note-header button {
+    display: flex;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.note-header button:hover {
+    background: var(--color-hover);
+    color: var(--color-selected);
+}
+
+.note-header .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.note-header button.none {
+    display: none;
+}
+
+.note-header .search-input  {
+    all: unset;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    height: 36px;
+    margin-left: 8px;
+    padding: 0 8px;
+    font-size: 14px;
+    width: 0;
+    opacity: 0;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.note-header .search-input.active {
+    width: 100%;
+    opacity: 1;
+}
+
+.note-header .search-input::placeholder {
+    color: var(--color-text);
+}
+
+/*Note Filter*/
+.note-filter {
+    display: flex;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    gap: 16px;
+}
+
+.note-filter__button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.note-filter__button:hover {
+    background: var(--color-hover);
+    color: var(--color-selected);
+    transform: scale(1.05);
+}
+
+.note-filter__button.active {
+    background-color: var(--color-selected);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+/*Note List*/
+.notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 20px;
+    align-items: start;
+}
+
+.notes-list__empty {
+    width: 100%;
+    text-align: center;
+}
+
+/*Notes Item*/
+.notes-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.notes-item__stick {
+    position: absolute;
+    width: 3px;
+    height: 35px;
+    margin: 22px 0;
+    background-color: var(--color-selected);
+}
+
+/*Notes Item Body*/
+.notes-item-body {
+    padding: 20px;
+}
+
+.notes-item-body__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-white);
+    text-decoration: underline;
+}
+
+.notes-item-body__title:hover {
+    color: var(--color-selected);
+}
+
+.notes-item-body__createAt {
+    font-size: 12px;
+}
+
+.notes-item-body__body {
+    margin-top: 14px;
+    font-size: 14px;
+}
+
+/*Notes Button*/
+.notes-item-button {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 20px 20px;
+}
+
+.notes-item-button__delete {
+    color: var(--color-danger-hover);
+}
+
+.notes-item-button__delete:hover {
+    color: var(--color-danger);
+}
+
+.notes-item-button__achieve:hover,
+.notes-item-button__achieve.archived {
+    color: var(--color-selected);
+}
+
+.notes-item-button__achieve.archived:hover {
+    color: var(--color-text);
+}
+
+/*Note Input*/
+.note-input {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+}
+
+.note-input .note-input__form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.note-input__title {
+    font-size: 18px;
+    padding: 8px 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.note-input__form label {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.note-input__form input {
+    all: unset;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 8px;
+    font-size: 14px;
+    transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.note-input__form input::placeholder,
+.note-input__form textarea::placeholder {
+    color: var(--color-text);
+}
+
+.note-input__form textarea {
+    all: unset;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    height: 36px;
+    margin: 0;
+    padding: 8px;
+    font-size: 14px;
+    min-height: 150px;
+}
+
+.note-input__form input,
+.note-input__form textarea {
+    margin-bottom: 16px;
+}
+
+.note-input button {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: var(--font-family), serif;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--color-hover);
+    color: var(--color-selected);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.note-input button:disabled {
+    cursor: not-allowed;
+}
+
+.note-input button:hover {
+    background: var(--color-selected);
+    color: var(--color-white);
+}
+
+.not-found-page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+@media (max-width: 1300px) {
+    /* Note Sidebar */
+    .note-sidebar {
+        width: 0;
+        left: -90px;
+        overflow: hidden;
+        transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    }
+
+    .note-sidebar.active {
+        width: 270px;
+        left: 0;
+        display: block;
+        z-index: 99;
+    }
+
+    .note-sidebar.active h1,
+    .note-sidebar.active .icon,
+    .note-sidebar.active .icon-name {
+        display: block;
+    }
+
+    .note-sidebar.active .icon-meh {
+        display: none;
+    }
+
+    /* Note Layout */
+    .note-layout {
+        margin-left: 0;
+    }
+
+    .note-sidebar.active + .note-layout {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    /*Note Filter*/
+    .note-filter__button span {
+        opacity: 0;
+        max-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: opacity 0.3s ease, max-width 0.3s ease;
+    }
+
+    .note-filter__button.active span {
+        opacity: 1;
+        max-width: 100px;
+    }
+}
