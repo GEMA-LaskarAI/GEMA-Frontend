@@ -1,7 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 export async function getQuestions() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
     const res = await fetch(`${BASE_URL}questions`, {
         headers: {
@@ -16,7 +16,7 @@ export async function getQuestions() {
 }
 
 export async function submitAnswers(answers) {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
     const res = await fetch(`${BASE_URL}answers`, {
         method: "POST",

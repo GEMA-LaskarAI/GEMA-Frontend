@@ -39,7 +39,12 @@ function LoginPage() {
             const res = await loginUser({ email: username, password });
             const token = res.data.access_token;
 
-            localStorage.setItem("token", token);
+            if (rememberMe) {
+                localStorage.setItem("token", token);
+            } else {
+                sessionStorage.setItem("token", token);
+            }
+
             navigate("/dashboard");
         } catch (err) {
             setError(err.message);
@@ -55,7 +60,7 @@ function LoginPage() {
 
                 <form onSubmit={handleLogin} className="login-form">
                     <Input
-                        label="Email atau Username"
+                        label="Email"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
