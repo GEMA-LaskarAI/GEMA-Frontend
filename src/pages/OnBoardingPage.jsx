@@ -13,22 +13,15 @@ function OnBoardingPage() {
         },
         {
             number: 2,
-            title: "Isi Nilai & Data",
-            desc: "Masukkan nilai rapor dan data minat kamu.",
-            action: () => navigate("/input-nilai"),
-            btn: "Isi Nilai",
-        },
-        {
-            number: 3,
-            title: "Tes Kepribadian",
-            desc: "Ikuti asesmen untuk mengenal potensi diri.",
+            title: "Tes Minat & Bakat",
+            desc: "Ikuti asesmen untuk mengenal potensi dan kepribadian kamu.",
             action: () => navigate("/question"),
             btn: "Mulai Tes",
         },
         {
-            number: 4,
+            number: 3,
             title: "Lihat Rekomendasi",
-            desc: "Dapatkan 3 jurusan paling cocok buat kamu.",
+            desc: "Dapatkan 3 jurusan paling cocok berdasarkan hasil asesmen.",
             action: () => navigate("/dashboard"),
             btn: "Lihat Hasil",
         },
@@ -36,27 +29,30 @@ function OnBoardingPage() {
 
     const team = [
         {
-            icon: "🌟",
-            name: "Muhammad Dila",
-            role: "Frontend Developer",
+            icon: "🧠",
+            name: "Daniel Jeans Ricard Silitonga",
+            id: "A002YBM531",
+            campus: "Institut Teknologi Bandung",
         },
         {
-            icon: "💡",
-            name: "Nama 2",
-            role: "Machine Learning Engineer",
+            icon: "💻",
+            name: "Muhammad Dila",
+            id: "A764YBM310",
+            campus: "Universitas Teknologi Bandung",
         },
         {
             icon: "📊",
-            name: "Nama 3",
-            role: "Machine Learning Engineer",
+            name: "Willy Wilsen",
+            id: "A002YBF500",
+            campus: "Institut Teknologi Bandung",
         },
         {
-            icon: "🧠",
-            name: "Nama 4",
-            role: "Machine Learning Engineer",
+            icon: "🌟",
+            name: "Cecilia Agnes Vechrisda Manalu",
+            id: "A764XBM530",
+            campus: "Universitas Teknologi Bandung",
         },
     ];
-
 
     return (
         <>
@@ -124,6 +120,7 @@ function OnBoardingPage() {
                             <div className="step-circle">{member.icon}</div>
                             <h3>{member.name}</h3>
                             <p>{member.role}</p>
+                            <p>{member.campus}</p>
                         </div>
                     ))}
                 </div>

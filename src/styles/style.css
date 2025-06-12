@@ -493,6 +493,10 @@ input[type="radio"]:hover {
     margin: auto;
 }
 
+.getstarted-grid p, .getstarted-header p {
+    margin-top: 8px;
+}
+
 .getstarted-card {
     background-color: white;
     border-radius: 12px;

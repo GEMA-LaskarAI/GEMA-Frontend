@@ -16,6 +16,7 @@ function DashboardPage() {
     const handleLogout = () => {
         localStorage.removeItem("token");
         sessionStorage.removeItem("token");
+        sessionStorage.removeItem("recommendations");
         navigate("/");
     };
 
@@ -47,7 +48,7 @@ function DashboardPage() {
                         ) : (
                             <div className="no-recommendation">
                                 <p>
-                                    Belum ada rekomendasi. Silakan lengkapi data minat & nilai
+                                    Belum ada rekomendasi. Silakan isi pertanyaan minat & bakat
                                     kamu terlebih dahulu.
                                 </p>
                                 <Button
