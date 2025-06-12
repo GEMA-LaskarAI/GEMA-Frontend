@@ -1,30 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../component/ui/Button.jsx";
+import { useEffect, useState } from "react";
 
 function DashboardPage() {
     const navigate = useNavigate();
+    const [recommendations, setRecommendations] = useState([]);
+
+    useEffect(() => {
+        const stored = sessionStorage.getItem("recommendations");
+        if (stored) {
+            setRecommendations(JSON.parse(stored));
+        }
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         sessionStorage.removeItem("token");
         navigate("/");
     };
-
-    // Dummy rekomendasi, bisa diganti nanti dari backend/API
-    const recommendations = [
-        {
-            name: "Teknik Informatika",
-            probability: 87.2,
-        },
-        {
-            name: "Sistem Informasi",
-            probability: 82.5,
-        },
-        {
-            name: "Ilmu Komputer",
-            probability: 78.1,
-        },
-    ];
 
     return (
         <div className="dashboard-page">
@@ -40,9 +33,16 @@ function DashboardPage() {
                                         <h4>
                                             {index + 1}. {item.name}
                                         </h4>
-                                        <p>Probabilitas: {item.probability}%</p>
+                                        {item.probability && (
+                                            <p>Probabilitas: {item.probability}%</p>
+                                        )}
                                     </div>
                                 ))}
+                                <div className="recommendation-footer">
+                                    <Link to="/question" className="link-retry">
+                                        🔁 Ulangi Pertanyaan
+                                    </Link>
+                                </div>
                             </div>
                         ) : (
                             <div className="no-recommendation">
@@ -52,10 +52,10 @@ function DashboardPage() {
                                 </p>
                                 <Button
                                     variant="primary"
-                                    onClick={() => navigate("/input-nilai")}
+                                    onClick={() => navigate("/question")}
                                     className="recommendation-button"
                                 >
-                                    Isi Data Sekarang
+                                    Isi Minat dan Bakat
                                 </Button>
                             </div>
                         )}
@@ -65,12 +65,8 @@ function DashboardPage() {
                 <div className="dashboard-right">
                     <div className="profile-card">
                         <h3>Profil Singkat</h3>
-                        <p>
-                            <strong>Nama:</strong> John Doe
-                        </p>
-                        <p>
-                            <strong>Email:</strong> johndoe@email.com
-                        </p>
+                        <p><strong>Nama:</strong> John Doe</p>
+                        <p><strong>Email:</strong> johndoe@email.com</p>
                         <Button variant="danger" onClick={handleLogout}>
                             Keluar
                         </Button>

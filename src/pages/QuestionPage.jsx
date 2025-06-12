@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { getQuestions, submitAnswers } from "../services/questionService";
 import Button from "../component/ui/Button.jsx";
+import {useNavigate} from "react-router-dom";
 
 function QuestionPage() {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getQuestions()
@@ -24,14 +28,32 @@ function QuestionPage() {
     };
 
     const handleSubmit = async () => {
-        const incomplete = answers.some((a) => a.score === 0);
-        if (incomplete) return alert("Semua pertanyaan wajib dijawab!");
+        const unanswered = answers.find((a) => a.score === 0);
+        if (unanswered) {
+            const target = document.getElementById(`question-${unanswered.question_id}`);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "center" });
+                target.classList.add("highlight-question");
+                setTimeout(() => target.classList.remove("highlight-question"), 2000);
+            }
+            return;
+        }
 
         try {
-            await submitAnswers(answers);
+            setIsSubmitting(true);
+            const res = await submitAnswers(answers);
+
+            const recommendations = res?.data;
+            if (recommendations) {
+                sessionStorage.setItem("recommendations", JSON.stringify(recommendations));
+            }
+
             alert("Jawaban berhasil dikirim!");
+            navigate("/dashboard");
         } catch (err) {
             alert("Gagal submit: " + err.message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -43,7 +65,11 @@ function QuestionPage() {
                 </div>
 
                 {questions.map((q) => (
-                    <div key={q.id} className="question-card">
+                    <div
+                        key={q.id}
+                        id={`question-${q.id}`}
+                        className="question-card"
+                    >
                         <p className="question-text">{q.text}</p>
                         <div className="scale-options">
                             <span className="scale-label">Sangat Tidak Setuju</span>
@@ -68,11 +94,11 @@ function QuestionPage() {
 
                 <Button
                     onClick={handleSubmit}
-                    disabled={answers.some((a) => a.score === 0)}
+                    disabled={isSubmitting}
+                    style={{ marginTop: "2rem" }}
                 >
-                    Kirim Jawaban
+                    {isSubmitting ? "Mengirim..." : "Kirim Jawaban"}
                 </Button>
-
             </div>
         </div>
     );
