@@ -41,13 +41,7 @@ function QuestionPage() {
 
         try {
             setIsSubmitting(true);
-            const res = await submitAnswers(answers);
-
-            const recommendations = res?.data;
-            if (recommendations) {
-                sessionStorage.setItem("recommendations", JSON.stringify(recommendations));
-            }
-
+            await submitAnswers(answers);
             alert("Jawaban berhasil dikirim!");
             navigate("/dashboard");
         } catch (err) {

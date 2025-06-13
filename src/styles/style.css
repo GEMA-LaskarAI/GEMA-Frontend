@@ -328,6 +328,12 @@ body {
     text-decoration: underline;
 }
 
+.dashboard-page .getstarted-card {
+    background: linear-gradient(to right, #f0f4ff, #ffffff);
+    border: 1px solid #e5e7eb;
+    color: #1f2937;
+}
+
 /*Question Page*/
 .question-page {
     padding: 2rem;
@@ -482,7 +488,10 @@ input[type="radio"]:hover {
 
 .getstarted-header {
     text-align: center;
-    margin-bottom: 48px;
+}
+
+.getstarted-header:has(h1) {
+    padding-bottom: 0;
 }
 
 .getstarted-grid {
@@ -491,6 +500,7 @@ input[type="radio"]:hover {
     gap: 24px;
     max-width: 1000px;
     margin: auto;
+    margin-top: 48px;
 }
 
 .getstarted-grid p, .getstarted-header p {

@@ -29,3 +29,21 @@ export async function registerUser({ name, email, password }) {
 
     return await res.json();
 }
+
+export async function getProfile() {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+    const res = await fetch(`${BASE_URL}profile`, {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Gagal mengambil data profil");
+    }
+
+    return await res.json();
+}
